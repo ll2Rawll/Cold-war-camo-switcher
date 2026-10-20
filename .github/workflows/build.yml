@@ -1,0 +1,60 @@
+name: Build and verify Windows app
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Core and native Windows memory checks
+        run: dotnet run --project tests/CamoSwitcher.Tests -c Release
+      - name: Build report checks on PowerShell 5.1
+        shell: powershell
+        run: ./tests/Test-BuildReport.ps1
+      - name: Build report checks on PowerShell 7
+        run: ./tests/Test-BuildReport.ps1
+      - name: Publish self-contained Windows x64 app
+        run: >-
+          dotnet publish src/CamoSwitcher.App -c Release -r win-x64
+          --self-contained true -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/windows
+      - name: Verify UI and capture preview
+        run: |
+          $preview = Join-Path (Get-Location) 'artifacts/ui-preview.png'
+          $app = Start-Process -FilePath './artifacts/windows/ColdWarCamoSwitcher.exe' -ArgumentList @('--smoke-test', ('"{0}"' -f $preview)) -PassThru
+          if (-not $app.WaitForExit(30000)) {
+            $app.Kill()
+            throw 'The UI smoke check timed out.'
+          }
+          if ($app.ExitCode -ne 0) { throw "The UI smoke check failed: $($app.ExitCode)" }
+          if (-not (Test-Path -LiteralPath $preview)) { throw 'The UI preview was not created.' }
+      - name: Package Windows download
+        run: |
+          Copy-Item docs/QUICKSTART.md artifacts/windows/READ-ME-FIRST.md
+          Copy-Item tools/Get-ColdWarBuildReport.ps1 artifacts/windows/
+          Compress-Archive -Path artifacts/windows/* -DestinationPath artifacts/ColdWarCamoSwitcher-win-x64.zip
+          $hash = (Get-FileHash artifacts/ColdWarCamoSwitcher-win-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  ColdWarCamoSwitcher-win-x64.zip" | Set-Content artifacts/SHA256SUMS -Encoding ascii
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: |
+            artifacts/ColdWarCamoSwitcher-win-x64.zip
+            artifacts/SHA256SUMS
+            artifacts/ui-preview.png
+          if-no-files-found: error
+          retention-days: 14

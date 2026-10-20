@@ -1,0 +1,728 @@
+[
+  {
+    "id": 1,
+    "name": "Shards",
+    "category": "Multiplayer · Spray",
+    "sourceKey": "camo_tier1_mp_01"
+  },
+  {
+    "id": 2,
+    "name": "Ambush",
+    "category": "Multiplayer · Spray",
+    "sourceKey": "camo_tier1_mp_02"
+  },
+  {
+    "id": 3,
+    "name": "Frozen Lake",
+    "category": "Multiplayer · Spray",
+    "sourceKey": "camo_tier1_mp_03"
+  },
+  {
+    "id": 4,
+    "name": "Debris",
+    "category": "Multiplayer · Spray",
+    "sourceKey": "camo_tier1_mp_04"
+  },
+  {
+    "id": 5,
+    "name": "Prosper",
+    "category": "Multiplayer · Spray",
+    "sourceKey": "camo_tier1_mp_05"
+  },
+  {
+    "id": 6,
+    "name": "Stroke",
+    "category": "Zombies · Grunge",
+    "sourceKey": "camo_tier1_zm_01"
+  },
+  {
+    "id": 7,
+    "name": "Glacier",
+    "category": "Zombies · Grunge",
+    "sourceKey": "camo_tier1_zm_02"
+  },
+  {
+    "id": 8,
+    "name": "Grudge",
+    "category": "Zombies · Grunge",
+    "sourceKey": "camo_tier1_zm_03"
+  },
+  {
+    "id": 9,
+    "name": "Bloodshed",
+    "category": "Zombies · Grunge",
+    "sourceKey": "camo_tier1_zm_04"
+  },
+  {
+    "id": 10,
+    "name": "Rotten",
+    "category": "Zombies · Grunge",
+    "sourceKey": "camo_tier1_zm_05"
+  },
+  {
+    "id": 11,
+    "name": "Gravel",
+    "category": "Multiplayer · Stripes",
+    "sourceKey": "camo_tier2_mp_01"
+  },
+  {
+    "id": 12,
+    "name": "Graze",
+    "category": "Multiplayer · Stripes",
+    "sourceKey": "camo_tier2_mp_02"
+  },
+  {
+    "id": 13,
+    "name": "Frost",
+    "category": "Multiplayer · Stripes",
+    "sourceKey": "camo_tier2_mp_03"
+  },
+  {
+    "id": 14,
+    "name": "Thrash",
+    "category": "Multiplayer · Stripes",
+    "sourceKey": "camo_tier2_mp_04"
+  },
+  {
+    "id": 15,
+    "name": "Bengal",
+    "category": "Multiplayer · Stripes",
+    "sourceKey": "camo_tier2_mp_05"
+  },
+  {
+    "id": 16,
+    "name": "Wasteland",
+    "category": "Zombies · Liquid",
+    "sourceKey": "camo_tier2_zm_01"
+  },
+  {
+    "id": 17,
+    "name": "Amphibian",
+    "category": "Zombies · Liquid",
+    "sourceKey": "camo_tier2_zm_02"
+  },
+  {
+    "id": 18,
+    "name": "Boundary",
+    "category": "Zombies · Liquid",
+    "sourceKey": "camo_tier2_zm_03"
+  },
+  {
+    "id": 19,
+    "name": "Threshold",
+    "category": "Zombies · Liquid",
+    "sourceKey": "camo_tier2_zm_04"
+  },
+  {
+    "id": 20,
+    "name": "Banished",
+    "category": "Zombies · Liquid",
+    "sourceKey": "camo_tier2_zm_05"
+  },
+  {
+    "id": 21,
+    "name": "Platoon",
+    "category": "Multiplayer · Classic",
+    "sourceKey": "camo_tier3_mp_01"
+  },
+  {
+    "id": 22,
+    "name": "Ash",
+    "category": "Multiplayer · Classic",
+    "sourceKey": "camo_tier3_mp_02"
+  },
+  {
+    "id": 23,
+    "name": "Checkpoint",
+    "category": "Multiplayer · Classic",
+    "sourceKey": "camo_tier3_mp_03"
+  },
+  {
+    "id": 24,
+    "name": "Coercion",
+    "category": "Multiplayer · Classic",
+    "sourceKey": "camo_tier3_mp_04"
+  },
+  {
+    "id": 25,
+    "name": "Ransom",
+    "category": "Multiplayer · Classic",
+    "sourceKey": "camo_tier3_mp_05"
+  },
+  {
+    "id": 26,
+    "name": "Extortion",
+    "category": "Zombies · Brushstroke",
+    "sourceKey": "camo_tier3_zm_01"
+  },
+  {
+    "id": 27,
+    "name": "Degeneration",
+    "category": "Zombies · Brushstroke",
+    "sourceKey": "camo_tier3_zm_02"
+  },
+  {
+    "id": 28,
+    "name": "Downfall",
+    "category": "Zombies · Brushstroke",
+    "sourceKey": "camo_tier3_zm_03"
+  },
+  {
+    "id": 29,
+    "name": "Drench",
+    "category": "Zombies · Brushstroke",
+    "sourceKey": "camo_tier3_zm_04"
+  },
+  {
+    "id": 30,
+    "name": "Chemical",
+    "category": "Zombies · Brushstroke",
+    "sourceKey": "camo_tier3_zm_05"
+  },
+  {
+    "id": 31,
+    "name": "Blockade",
+    "category": "Multiplayer · Geometric",
+    "sourceKey": "camo_tier4_mp_01"
+  },
+  {
+    "id": 32,
+    "name": "Warsaw",
+    "category": "Multiplayer · Geometric",
+    "sourceKey": "camo_tier4_mp_02"
+  },
+  {
+    "id": 33,
+    "name": "Transform",
+    "category": "Multiplayer · Geometric",
+    "sourceKey": "camo_tier4_mp_03"
+  },
+  {
+    "id": 34,
+    "name": "Fraction",
+    "category": "Multiplayer · Geometric",
+    "sourceKey": "camo_tier4_mp_04"
+  },
+  {
+    "id": 35,
+    "name": "Bloodline",
+    "category": "Multiplayer · Geometric",
+    "sourceKey": "camo_tier4_mp_05"
+  },
+  {
+    "id": 36,
+    "name": "Decadence",
+    "category": "Zombies · Vintage",
+    "sourceKey": "camo_tier4_zm_01"
+  },
+  {
+    "id": 37,
+    "name": "Bravado",
+    "category": "Zombies · Vintage",
+    "sourceKey": "camo_tier4_zm_02"
+  },
+  {
+    "id": 38,
+    "name": "Funkadelic",
+    "category": "Zombies · Vintage",
+    "sourceKey": "camo_tier4_zm_03"
+  },
+  {
+    "id": 39,
+    "name": "Boutique",
+    "category": "Zombies · Vintage",
+    "sourceKey": "camo_tier4_zm_04"
+  },
+  {
+    "id": 40,
+    "name": "Maniac",
+    "category": "Zombies · Vintage",
+    "sourceKey": "camo_tier4_zm_05"
+  },
+  {
+    "id": 41,
+    "name": "Frith",
+    "category": "Multiplayer · Flora",
+    "sourceKey": "camo_tier5_mp_01"
+  },
+  {
+    "id": 42,
+    "name": "Old Growth",
+    "category": "Multiplayer · Flora",
+    "sourceKey": "camo_tier5_mp_02"
+  },
+  {
+    "id": 43,
+    "name": "Nectar",
+    "category": "Multiplayer · Flora",
+    "sourceKey": "camo_tier5_mp_03"
+  },
+  {
+    "id": 44,
+    "name": "Lumber",
+    "category": "Multiplayer · Flora",
+    "sourceKey": "camo_tier5_mp_04"
+  },
+  {
+    "id": 45,
+    "name": "Cherry Blossom",
+    "category": "Multiplayer · Flora",
+    "sourceKey": "camo_tier5_mp_05"
+  },
+  {
+    "id": 46,
+    "name": "Growl",
+    "category": "Zombies · Fauna",
+    "sourceKey": "camo_tier5_zm_01"
+  },
+  {
+    "id": 47,
+    "name": "Scavenger",
+    "category": "Zombies · Fauna",
+    "sourceKey": "camo_tier5_zm_02"
+  },
+  {
+    "id": 48,
+    "name": "Zebra",
+    "category": "Zombies · Fauna",
+    "sourceKey": "camo_tier5_zm_03"
+  },
+  {
+    "id": 49,
+    "name": "Blue Tiger",
+    "category": "Zombies · Fauna",
+    "sourceKey": "camo_tier5_zm_04"
+  },
+  {
+    "id": 50,
+    "name": "Rising Tiger",
+    "category": "Zombies · Fauna",
+    "sourceKey": "camo_tier5_zm_05"
+  },
+  {
+    "id": 51,
+    "name": "Teleport",
+    "category": "Multiplayer · Science",
+    "sourceKey": "camo_tier6_mp_01"
+  },
+  {
+    "id": 52,
+    "name": "Cosmonaut",
+    "category": "Multiplayer · Science",
+    "sourceKey": "camo_tier6_mp_02"
+  },
+  {
+    "id": 53,
+    "name": "Decipher",
+    "category": "Multiplayer · Science",
+    "sourceKey": "camo_tier6_mp_03"
+  },
+  {
+    "id": 54,
+    "name": "Integer",
+    "category": "Multiplayer · Science",
+    "sourceKey": "camo_tier6_mp_04"
+  },
+  {
+    "id": 55,
+    "name": "Policia",
+    "category": "Multiplayer · Science",
+    "sourceKey": "camo_tier6_mp_05"
+  },
+  {
+    "id": 56,
+    "name": "Acidic",
+    "category": "Zombies · Topography",
+    "sourceKey": "camo_tier6_zm_01"
+  },
+  {
+    "id": 57,
+    "name": "Gunrunner",
+    "category": "Zombies · Topography",
+    "sourceKey": "camo_tier6_zm_02"
+  },
+  {
+    "id": 58,
+    "name": "Forecast",
+    "category": "Zombies · Topography",
+    "sourceKey": "camo_tier6_zm_03"
+  },
+  {
+    "id": 59,
+    "name": "Cartographer",
+    "category": "Zombies · Topography",
+    "sourceKey": "camo_tier6_zm_04"
+  },
+  {
+    "id": 60,
+    "name": "Sunder",
+    "category": "Zombies · Topography",
+    "sourceKey": "camo_tier6_zm_05"
+  },
+  {
+    "id": 61,
+    "name": "Gold",
+    "category": "Mastery",
+    "sourceKey": "camo_mastery_mp_gold"
+  },
+  {
+    "id": 62,
+    "name": "Diamond",
+    "category": "Mastery",
+    "sourceKey": "camo_mastery_mp_diamond"
+  },
+  {
+    "id": 63,
+    "name": "DM Ultra",
+    "category": "Mastery",
+    "sourceKey": "camo_mastery_mp_darkmatter"
+  },
+  {
+    "id": 64,
+    "name": "Golden Viper",
+    "category": "Mastery",
+    "sourceKey": "camo_mastery_zm_gold"
+  },
+  {
+    "id": 65,
+    "name": "Plague Diamond",
+    "category": "Mastery",
+    "sourceKey": "camo_mastery_zm_diamond"
+  },
+  {
+    "id": 66,
+    "name": "Dark Aether",
+    "category": "Mastery",
+    "sourceKey": "camo_mastery_zm_darkmatter"
+  },
+  {
+    "id": 67,
+    "name": "PAP · Orange",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_7d01d7f62d6a10cd"
+  },
+  {
+    "id": 68,
+    "name": "PAP · Green",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_7d01d4f62d6a0bb4"
+  },
+  {
+    "id": 69,
+    "name": "PAP · Pink",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_7d01d5f62d6a0d67"
+  },
+  {
+    "id": 70,
+    "name": "Groovy",
+    "category": "Multiplayer · Psychedelic",
+    "sourceKey": "camo_tier7_mp_01"
+  },
+  {
+    "id": 71,
+    "name": "Seducer",
+    "category": "Multiplayer · Psychedelic",
+    "sourceKey": "camo_tier7_mp_02"
+  },
+  {
+    "id": 72,
+    "name": "Blush",
+    "category": "Multiplayer · Psychedelic",
+    "sourceKey": "camo_tier7_mp_03"
+  },
+  {
+    "id": 73,
+    "name": "Melancholy",
+    "category": "Multiplayer · Psychedelic",
+    "sourceKey": "camo_tier7_mp_04"
+  },
+  {
+    "id": 74,
+    "name": "Bliss",
+    "category": "Multiplayer · Psychedelic",
+    "sourceKey": "camo_tier7_mp_05"
+  },
+  {
+    "id": 75,
+    "name": "Corrosion",
+    "category": "Zombies · Infection",
+    "sourceKey": "camo_tier7_zm_01"
+  },
+  {
+    "id": 76,
+    "name": "Entropy",
+    "category": "Zombies · Infection",
+    "sourceKey": "camo_tier7_zm_02"
+  },
+  {
+    "id": 77,
+    "name": "Contamination",
+    "category": "Zombies · Infection",
+    "sourceKey": "camo_tier7_zm_03"
+  },
+  {
+    "id": 78,
+    "name": "Glitch",
+    "category": "Zombies · Infection",
+    "sourceKey": "camo_tier7_zm_04"
+  },
+  {
+    "id": 79,
+    "name": "Conviction",
+    "category": "Zombies · Infection",
+    "sourceKey": "camo_tier7_zm_05"
+  },
+  {
+    "id": 80,
+    "name": "Atlanta FaZe · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_atl_ms"
+  },
+  {
+    "id": 81,
+    "name": "Atlanta FaZe · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_atl_pc"
+  },
+  {
+    "id": 82,
+    "name": "Atlanta FaZe · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_atl_sy"
+  },
+  {
+    "id": 83,
+    "name": "Chicago · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_chi_ms"
+  },
+  {
+    "id": 84,
+    "name": "Chicago · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_chi_pc"
+  },
+  {
+    "id": 85,
+    "name": "Chicago · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_chi_sy"
+  },
+  {
+    "id": 86,
+    "name": "Dallas Empire · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_dal_ms"
+  },
+  {
+    "id": 87,
+    "name": "Dallas Empire · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_dal_pc"
+  },
+  {
+    "id": 88,
+    "name": "Dallas Empire · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_dal_sy"
+  },
+  {
+    "id": 89,
+    "name": "Florida Mutineers · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_fl_ms"
+  },
+  {
+    "id": 90,
+    "name": "Florida Mutineers · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_fl_pc"
+  },
+  {
+    "id": 91,
+    "name": "Florida Mutineers · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_fl_sy"
+  },
+  {
+    "id": 92,
+    "name": "LA Guerrillas · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_la_gor_ms"
+  },
+  {
+    "id": 93,
+    "name": "LA Guerrillas · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_la_gor_pc"
+  },
+  {
+    "id": 94,
+    "name": "LA Guerrillas · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_la_gor_sy"
+  },
+  {
+    "id": 95,
+    "name": "OpTic LA · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_la_optic_ms"
+  },
+  {
+    "id": 96,
+    "name": "OpTic LA · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_la_optic_pc"
+  },
+  {
+    "id": 97,
+    "name": "OpTic LA · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_la_optic_sy"
+  },
+  {
+    "id": 98,
+    "name": "London Royal Ravens · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_lon_ms"
+  },
+  {
+    "id": 99,
+    "name": "London Royal Ravens · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_lon_pc"
+  },
+  {
+    "id": 100,
+    "name": "London Royal Ravens · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_lon_sy"
+  },
+  {
+    "id": 101,
+    "name": "Minnesota RØKKR · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_minn_ms"
+  },
+  {
+    "id": 102,
+    "name": "Minnesota RØKKR · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_minn_pc"
+  },
+  {
+    "id": 103,
+    "name": "Minnesota RØKKR · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_minn_sy"
+  },
+  {
+    "id": 104,
+    "name": "New York Subliners · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_nyc_ms"
+  },
+  {
+    "id": 105,
+    "name": "New York Subliners · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_nyc_pc"
+  },
+  {
+    "id": 106,
+    "name": "New York Subliners · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_nyc_sy"
+  },
+  {
+    "id": 107,
+    "name": "Paris Legion · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_par_ms"
+  },
+  {
+    "id": 108,
+    "name": "Paris Legion · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_par_pc"
+  },
+  {
+    "id": 109,
+    "name": "Paris Legion · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_par_sy"
+  },
+  {
+    "id": 110,
+    "name": "Seattle Surge · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_sea_ms"
+  },
+  {
+    "id": 111,
+    "name": "Seattle Surge · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_sea_pc"
+  },
+  {
+    "id": 112,
+    "name": "Seattle Surge · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_sea_sy"
+  },
+  {
+    "id": 113,
+    "name": "Toronto Ultra · MS",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_tor_ms"
+  },
+  {
+    "id": 114,
+    "name": "Toronto Ultra · PC",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_tor_pc"
+  },
+  {
+    "id": 115,
+    "name": "Toronto Ultra · SY",
+    "category": "CDL variants",
+    "sourceKey": "camo_t9_cdl_tor_sy"
+  },
+  {
+    "id": 116,
+    "name": "PAP · Red",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_1f6a6c20c48f449c"
+  },
+  {
+    "id": 117,
+    "name": "PAP · Blue / Green",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_21dc7ca90e70b941"
+  },
+  {
+    "id": 118,
+    "name": "PAP · Gold",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_21dc7ba90e70b78e"
+  },
+  {
+    "id": 119,
+    "name": "PAP · Colorful",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_3aec93dcc58ac8c4"
+  },
+  {
+    "id": 120,
+    "name": "PAP · Glitching Pink",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_478609b4450f219"
+  },
+  {
+    "id": 121,
+    "name": "PAP · Glitching Orange",
+    "category": "Pack-a-Punch",
+    "sourceKey": "hash_4785f9b4450f066"
+  }
+]

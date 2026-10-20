@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+artifacts/
+.vs/
+*.user
+*.dmp
+*.sav
+*.bak
+cold-war-build-*.json
+build-report.json
+diagnostics-*.json
