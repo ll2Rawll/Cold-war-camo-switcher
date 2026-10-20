@@ -1,5 +1,7 @@
 # Cold War Camo Switcher
 
+A Windows camo switcher for Call of Duty: Black Ops Cold War, with an iOS-inspired interface, searchable camo library, favorites, and savable local configs.
+
 ## Install
 
 Requires Windows 10/11 x64.
