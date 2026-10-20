@@ -16,7 +16,7 @@ public sealed class MainForm : Form
     private readonly TextBox _search = new() { PlaceholderText = "Search by camo name or ID", Dock = DockStyle.Fill };
     private readonly DataGridView _grid = new();
     private readonly Label _count = MakeLabel("", 9, Muted);
-    private readonly Label _name = MakeLabel("Shards", 25, TextColor, FontStyle.Bold);
+    private readonly Label _name = MakeLabel("Shards", 20, TextColor, FontStyle.Bold);
     private readonly Label _group = MakeLabel("Multiplayer · Spray  /  ID 1", 10, Accent);
     private readonly Label _status = MakeLabel("Start Cold War and open its camo menu.", 10, Muted);
     private readonly TextBox _log = new() { ReadOnly = true, Multiline = true, ScrollBars = ScrollBars.Vertical, Dock = DockStyle.Fill };
@@ -83,12 +83,12 @@ public sealed class MainForm : Form
     private void BuildLayout()
     {
         var root = Table(1, 5);
-        root.Padding = new Padding(24);
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 72));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 82));
+        root.Padding = new Padding(20);
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 64));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 74));
         root.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 120));
-        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 28));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 108));
+        root.RowStyles.Add(new RowStyle(SizeType.Absolute, 26));
         Controls.Add(root);
 
         var heading = Table(1, 2);
@@ -135,15 +135,15 @@ public sealed class MainForm : Form
         var details = Table(1, 10);
         details.BackColor = Surface;
         details.Padding = new Padding(20);
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 26));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 74));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 36));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 84));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 46));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 42));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 18));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 22));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 56));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 70));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 44));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 38));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 6));
         details.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 42));
+        details.RowStyles.Add(new RowStyle(SizeType.Absolute, 36));
         details.RowStyles.Add(new RowStyle(SizeType.Absolute, 0));
         details.Controls.Add(MakeLabel("SELECTED CAMO", 9, Muted, FontStyle.Bold), 0, 0);
         details.Controls.Add(_name, 0, 1);
@@ -193,9 +193,9 @@ public sealed class MainForm : Form
             Padding = new Padding(7, 0, 0, 0)
         };
         _grid.RowTemplate.Height = 36;
-        _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Camo", DataPropertyName = "Name", HeaderText = "CAMO", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 55 });
-        _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Category", DataPropertyName = "Category", HeaderText = "COLLECTION", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 45 });
-        _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Id", DataPropertyName = "Id", HeaderText = "ID", Width = 48 });
+        _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Camo", DataPropertyName = "Name", HeaderText = "CAMO", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 55, SortMode = DataGridViewColumnSortMode.NotSortable });
+        _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Category", DataPropertyName = "Category", HeaderText = "COLLECTION", AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill, FillWeight = 45, SortMode = DataGridViewColumnSortMode.NotSortable });
+        _grid.Columns.Add(new DataGridViewTextBoxColumn { Name = "Id", DataPropertyName = "Id", HeaderText = "ID", Width = 48, SortMode = DataGridViewColumnSortMode.NotSortable });
     }
 
     private void RefreshProcesses()
@@ -437,7 +437,8 @@ public sealed class MainForm : Form
         if (_grid.Rows.Count != 0 || _selected is not null) throw new InvalidOperationException("Empty search failed.");
         _search.Text = "";
         if (_grid.Rows.Count != 121) throw new InvalidOperationException("Catalog reset failed.");
-        if (_grid.Width < 400 || _name.Height < 50) throw new InvalidOperationException("The UI layout is too small.");
+        if (_grid.Width < 400 || _name.Height < 50 || _status.Height < 50)
+            throw new InvalidOperationException("The UI layout must keep the catalog, selected camo and connection status visible.");
     }
 
     private static TableLayoutPanel Table(int columns, int rows) => new()
@@ -454,7 +455,7 @@ public sealed class MainForm : Form
 
     private static Button MakeButton(string text, bool primary = false)
     {
-        var button = new Button
+        var button = new ActionButton(primary)
         {
             Text = text, Dock = DockStyle.Fill, FlatStyle = FlatStyle.Flat,
             BackColor = primary ? Accent : Surface, ForeColor = primary ? Background : TextColor,
@@ -462,6 +463,25 @@ public sealed class MainForm : Form
         };
         button.FlatAppearance.BorderSize = 0;
         return button;
+    }
+
+    private sealed class ActionButton : Button
+    {
+        private readonly bool _primary;
+        public ActionButton(bool primary)
+        {
+            _primary = primary;
+            SetStyle(ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.Clear(Enabled ? _primary ? Accent : Surface : Color.FromArgb(34, 41, 48));
+            var color = Enabled ? _primary ? Background : TextColor : Color.FromArgb(133, 149, 158);
+            TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, color,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+            if (Enabled && Focused && ShowFocusCues)
+                ControlPaint.DrawFocusRectangle(e.Graphics, Rectangle.Inflate(ClientRectangle, -4, -4), color, BackColor);
+        }
     }
 
     private sealed record ProcessChoice(int Id, string Name)
