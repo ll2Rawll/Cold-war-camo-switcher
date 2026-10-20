@@ -14,10 +14,11 @@ internal static class Program
                 using var form = new MainForm(tempDirectory);
                 form.Show();
                 Application.DoEvents();
+                var libraryPreview = Path.Combine(Path.GetDirectoryName(Path.GetFullPath(args[1]))!,
+                    Path.GetFileNameWithoutExtension(args[1]) + "-library.png");
+                CapturePreview(form, libraryPreview);
                 form.VerifyUi();
-                using var bitmap = new Bitmap(form.Width, form.Height);
-                form.DrawToBitmap(bitmap, new Rectangle(Point.Empty, form.Size));
-                bitmap.Save(args[1], System.Drawing.Imaging.ImageFormat.Png);
+                CapturePreview(form, args[1]);
                 form.Hide();
                 using var reopened = new MainForm(tempDirectory);
                 reopened.Show();
@@ -29,5 +30,12 @@ internal static class Program
         }
         using var mainForm = new MainForm();
         Application.Run(mainForm);
+    }
+
+    private static void CapturePreview(Form form, string path)
+    {
+        using var bitmap = new Bitmap(form.Width, form.Height);
+        form.DrawToBitmap(bitmap, new Rectangle(Point.Empty, form.Size));
+        bitmap.Save(path, System.Drawing.Imaging.ImageFormat.Png);
     }
 }
