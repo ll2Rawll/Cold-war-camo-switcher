@@ -245,10 +245,10 @@ public sealed partial class MainForm
         layout.Padding = new Padding(18);
         layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
         layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42));
-        var text = new TextBox { Multiline = true, ReadOnly = true, Text = _log.Text, ScrollBars = ScrollBars.Vertical,
+        var text = new TextBox { Multiline = true, ReadOnly = true, Text = string.Join(Environment.NewLine, _messages), ScrollBars = ScrollBars.Vertical,
             Dock = DockStyle.Fill, BackColor = Surface, ForeColor = TextColor, BorderStyle = BorderStyle.None };
         var export = MakeButton("Save diagnostic report");
-        export.Click += (_, _) => ExportDiagnostics();
+        export.Click += (_, _) => ExportDiagnostics(dialog);
         layout.Controls.Add(text, 0, 0);
         layout.Controls.Add(export, 0, 1);
         dialog.Controls.Add(layout);

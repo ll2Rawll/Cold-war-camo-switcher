@@ -169,6 +169,7 @@ public sealed partial class MainForm
 
     protected override void OnPaintBackground(PaintEventArgs e)
     {
+        if (ClientSize.Width == 0 || ClientSize.Height == 0) return;
         using var background = new LinearGradientBrush(ClientRectangle, Color.FromArgb(235, 244, 255), Color.FromArgb(235, 232, 250), 65);
         e.Graphics.FillRectangle(background, ClientRectangle);
         using var path = new GraphicsPath();

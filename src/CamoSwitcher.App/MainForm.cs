@@ -19,7 +19,6 @@ public sealed partial class MainForm : Form
     private readonly Label _name = MakeLabel("Shards", 20, TextColor, FontStyle.Bold);
     private readonly Label _group = MakeLabel("Multiplayer · Spray  /  ID 1", 10, Accent);
     private readonly Label _status = MakeLabel("Start Cold War and open its camo menu.", 10, Muted);
-    private readonly TextBox _log = new() { ReadOnly = true, Multiline = true, ScrollBars = ScrollBars.Vertical, Dock = DockStyle.Fill };
     private readonly GlassButton _refresh = MakeButton("Refresh");
     private readonly GlassButton _scan = MakeButton("Connect", true);
     private readonly GlassButton _cancel = MakeButton("Cancel");
@@ -254,10 +253,10 @@ public sealed partial class MainForm : Form
         _exportConfigs.Enabled = _userData.Configs.Length > 0;
     }
 
-    private void ExportDiagnostics()
+    private void ExportDiagnostics(IWin32Window? owner = null)
     {
         using var picker = new SaveFileDialog { Filter = "JSON report (*.json)|*.json", FileName = $"diagnostics-{DateTime.UtcNow:yyyyMMdd-HHmmss}.json" };
-        if (picker.ShowDialog(this) != DialogResult.OK) return;
+        if (picker.ShowDialog(owner ?? this) != DialogResult.OK) return;
         try
         {
             var report = new
@@ -289,9 +288,6 @@ public sealed partial class MainForm : Form
     {
         _messages.Add($"{DateTime.Now:HH:mm:ss}  {message}");
         if (_messages.Count > 250) _messages.RemoveAt(0);
-        _log.Text = string.Join(Environment.NewLine, _messages);
-        _log.SelectionStart = _log.TextLength;
-        _log.ScrollToCaret();
         _activitySummary.Text = message;
     }
 
