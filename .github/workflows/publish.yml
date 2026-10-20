@@ -1,0 +1,50 @@
+name: Publish verified Windows release
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_run_id:
+        description: Successful main-branch Build and verify Windows app run ID
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      BUILD_RUN_ID: ${{ inputs.build_run_id }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Verify build provenance and publish its package
+        run: |
+          if ($env:BUILD_RUN_ID -notmatch '^[0-9]+$') { throw 'A numeric workflow run ID is required.' }
+          $repo = $env:GITHUB_REPOSITORY
+          $runJson = gh api "repos/$repo/actions/runs/$($env:BUILD_RUN_ID)"
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot read the selected build run.' }
+          $run = $runJson | ConvertFrom-Json
+          if ($run.status -ne 'completed' -or $run.conclusion -ne 'success' -or
+              $run.path -ne '.github/workflows/build.yml' -or
+              $run.head_repository.full_name -ne $repo -or $run.head_branch -ne 'main' -or
+              $run.event -notin @('push', 'workflow_dispatch')) {
+            throw 'Publish only a successful build of this repository main branch.'
+          }
+          if ($run.head_sha -notmatch '^[0-9a-f]{40}$') { throw 'The build commit is invalid.' }
+          gh run download $env:BUILD_RUN_ID --repo $repo --name windows-x64 --dir release-artifacts
+          if ($LASTEXITCODE -ne 0) { throw 'Cannot download the verified build artifact.' }
+          $checksum = (Get-Content release-artifacts/SHA256SUMS -Raw).Trim()
+          if ($checksum -notmatch '^([a-f0-9]{64})\s+ColdWarCamoSwitcher-win-x64.zip$') {
+            throw 'The package checksum file is invalid.'
+          }
+          $expected = $Matches[1]
+          $actual = (Get-FileHash release-artifacts/ColdWarCamoSwitcher-win-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $expected) { throw 'The verified package checksum does not match.' }
+          gh release create v0.1.0 release-artifacts/ColdWarCamoSwitcher-win-x64.zip release-artifacts/SHA256SUMS release-artifacts/ui-preview.png --repo $repo --target $run.head_sha --prerelease --title 'v0.1.0 - Experimental Windows camo switcher' --notes-file .github/release-notes.md
+          if ($LASTEXITCODE -ne 0) { throw 'Release publication failed.' }
