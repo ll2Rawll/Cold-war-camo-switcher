@@ -346,6 +346,12 @@ public sealed partial class MainForm : Form
         VerifyConfigUi();
         if (_grid.Width < 380 || _name.Height < 28 || _status.Height < 28 || _configs.Parent!.Height < 27)
             throw new InvalidOperationException("The UI layout must keep the catalog, selected camo and connection status visible.");
+        foreach (var control in new Control[] { _scan, _refresh, _cancel, _disconnect, _loadConfig, _saveConfig, _configs, _configName, _category, _search })
+        {
+            var parent = control.Parent!;
+            if (control.Bottom > parent.ClientSize.Height || control.Right > parent.ClientSize.Width || control.Top < 0 || control.Left < 0)
+                throw new InvalidOperationException($"A control is clipped in its container: {control.AccessibleName ?? control.Text}.");
+        }
     }
 
     private sealed record ProcessChoice(int Id, string Name)

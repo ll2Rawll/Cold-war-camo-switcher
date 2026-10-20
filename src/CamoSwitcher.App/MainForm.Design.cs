@@ -178,11 +178,19 @@ public sealed partial class MainForm
         e.Graphics.FillPath(glow, path);
     }
 
-    private static TableLayoutPanel Table(int columns, int rows) => new()
+    private static TableLayoutPanel Table(int columns, int rows)
     {
-        ColumnCount = columns, RowCount = rows, Dock = DockStyle.Fill,
-        BackColor = Color.Transparent, Margin = Padding.Empty, Padding = Padding.Empty
-    };
+        var table = new TableLayoutPanel
+        {
+            ColumnCount = columns, RowCount = rows, Dock = DockStyle.Fill,
+            BackColor = Color.Transparent, Margin = Padding.Empty, Padding = Padding.Empty
+        };
+        // Single-row/column tables must honor the available space, rather than
+        // expanding to the default preferred size of their nested input panels.
+        if (rows == 1) table.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+        if (columns == 1) table.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+        return table;
+    }
 
     private static Label MakeLabel(string text, float size, Color color, FontStyle style = FontStyle.Regular) => new()
     {

@@ -91,7 +91,8 @@ internal sealed class GlassButton : Button
         e.Graphics.DrawPath(border, shape);
         var ink = !Enabled ? Color.FromArgb(129, 144, 165) : blue ? Color.White : Color.FromArgb(40, 66, 107);
         TextRenderer.DrawText(e.Graphics, Text, Font, ClientRectangle, ink,
-            TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+            TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis |
+            TextFormatFlags.PreserveGraphicsClipping | TextFormatFlags.PreserveGraphicsTranslateTransform);
         if (Enabled && Focused && ShowFocusCues)
             ControlPaint.DrawFocusRectangle(e.Graphics, Rectangle.Inflate(ClientRectangle, -7, -7), ink, BackColor);
     }
