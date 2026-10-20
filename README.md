@@ -53,6 +53,8 @@ For the standalone build report helper:
 
 ## Compatibility research and remaining save work
 
+The [persistence investigation](docs/PERSISTENCE_RESEARCH.md) records the saved-loadout camo fields, the internal stats-upload reference, the online/offline schema differences, and the missing evidence needed before any force-save or permanent-unlock claim.
+
 To investigate a missing Game Pass signature, provide the build report and app diagnostics in the development conversation. The selected executable's full hash is more reliable than a version string. Offline save editing additionally needs relevant save copies from before and after one normal camo change, with their layout and integrity rules identified. Online persistence requires a verified build-specific method and an in-game save/restart test.
 
 ## Data and method references
