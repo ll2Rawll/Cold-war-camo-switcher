@@ -145,7 +145,7 @@ var tests = new (string Name, Action Run)[]
         Check.Throws<ObjectDisposedException>(() => session.Apply(66));
         Check.Equal(0, memory.WriteCount);
     })
-};
+}.Concat(ConfigChecks.All()).ToArray();
 
 var failed = 0;
 foreach (var test in tests)
