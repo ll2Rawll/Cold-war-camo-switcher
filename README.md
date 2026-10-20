@@ -4,7 +4,7 @@
 
 Requires Windows 10/11 x64.
 
-1. Download `ColdWarCamoSwitcher-win-x64.zip` from [Releases](https://github.com/pistolswang013/Cold-war-camo-switcher/releases).
+1. Download `ColdWarCamoSwitcher-win-x64.zip` from [Releases](https://github.com/ll2Rawll/Cold-war-camo-switcher/releases).
 2. Extract the ZIP into a folder.
 3. Open `ColdWarCamoSwitcher.exe`. The .NET runtime is included.
 
