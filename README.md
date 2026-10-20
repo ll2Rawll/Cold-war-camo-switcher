@@ -4,6 +4,18 @@ A Windows desktop camo menu targeting **Call of Duty: Black Ops Cold War on PC X
 
 **Experimental: Game Pass compatibility has not been tested in the actual game.** The app implements a historical Shards option replacement method. It does not permanently unlock camos, provide an online force-save operation, or edit offline save files. Some IDs may require assets or validation that this method cannot provide.
 
+## Preview
+
+Screenshots of the Windows app. The saved-config view uses sample local data with no game connected.
+
+**Camo library**
+
+![Cold War Camo Switcher with the glass interface, searchable camo library and collection filter](docs/images/camo-library.png)
+
+**Saved configs and favorites**
+
+![Dark Aether selected and favorited, with a named local config and import, export, save and load controls](docs/images/saved-configs.png)
+
 ## Download and use
 
 Download the Windows x64 ZIP from [Releases](https://github.com/pistolswang013/Cold-war-camo-switcher/releases), extract it, and open `ColdWarCamoSwitcher.exe`. The release includes the .NET runtime; no SDK installation is needed.
