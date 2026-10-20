@@ -38,3 +38,15 @@ Keyboard shortcuts: **Ctrl+F** searches, **Ctrl+S** saves the named config, **F5
 ## Persistence and offline saves
 
 Online force-save and offline save-file editing remain unimplemented. These require the exact target build, the relevant save layout/integrity checks, and an actual in-game restart test. The app's session switcher is usable code, but it has not been validated against your running Game Pass game.
+
+### Test the game's Custom Mod save
+
+Cold War has a built-in Custom Mods save feature, documented in [Treyarch's patch notes](https://www.treyarch.com/game-intel/2021/04/April_15_2021_Patch_Notes). It is a candidate for retaining an equipped selection. **Saving a runtime-swapped camo through it has not been verified on Game Pass.**
+
+1. Use a spare class. Without connecting the switcher, equip a normally unlocked camo, open Gunsmith's **Custom Mod Options**, and save a new named mod. Leave existing mods untouched.
+2. Close the game normally, restart it, and load that mod with the switcher closed. Confirm that this ordinary save retained its camo. If the control fails, stop: a swapped-camo result would be inconclusive.
+3. On that same weapon, follow the switcher steps above for one camo. Verify it appears on the weapon, then save a second Custom Mod under a different name through the game's menu. Do not overwrite the control.
+4. Restore the Shards option and close the switcher. Close the game normally. Restart it with the switcher still closed, reload your profile, and inspect both the class and the saved mod. Record whether each retains the camo, resets it, or rejects the selection.
+5. To distinguish a saved selection from an unlock, check whether the camo can be selected normally on another eligible class without loading the saved mod or running the app. Persistence on one mod alone does not demonstrate an unlock.
+
+Record the exact build report, mode (Multiplayer/Zombies and online/offline), weapon, selected camo, and each restart result. A preview before a restart or a successful memory-write message is insufficient. The workspace running development has no access to your game, so this test requires your Windows installation. See the [research notes](PERSISTENCE_RESEARCH.md) for the remaining format and save-path work.

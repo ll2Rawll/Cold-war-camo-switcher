@@ -55,6 +55,8 @@ For the standalone build report helper:
 
 The [persistence investigation](docs/PERSISTENCE_RESEARCH.md) records the saved-loadout camo fields, the internal stats-upload reference, the online/offline schema differences, and the missing evidence needed before any force-save or permanent-unlock claim.
 
+The first candidate is the game's built-in Custom Mod save. The [controlled restart test](docs/QUICKSTART.md#test-the-games-custom-mod-save) separates an ordinary successful save from a runtime-swapped camo and from an actual unlock. Retention of swapped camos on Game Pass remains unverified.
+
 To investigate a missing Game Pass signature, provide the build report and app diagnostics in the development conversation. The selected executable's full hash is more reliable than a version string. Offline save editing additionally needs relevant save copies from before and after one normal camo change, with their layout and integrity rules identified. Online persistence requires a verified build-specific method and an in-game save/restart test.
 
 ## Data and method references
