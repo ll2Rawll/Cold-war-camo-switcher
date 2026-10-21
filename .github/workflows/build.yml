@@ -43,7 +43,6 @@ jobs:
           if ($app.ExitCode -ne 0) { throw "The UI smoke check failed: $($app.ExitCode)" }
           if (-not (Test-Path -LiteralPath $preview)) { throw 'The UI preview was not created.' }
           if (-not (Test-Path -LiteralPath 'artifacts/ui-preview-library.png')) { throw 'The camo library preview was not created.' }
-          if (-not (Test-Path -LiteralPath 'artifacts/ui-preview-silent-aim.png')) { throw 'The aim settings preview was not created.' }
       - name: Package Windows download
         run: |
           Copy-Item docs/QUICKSTART.md artifacts/windows/READ-ME-FIRST.md
@@ -57,6 +56,7 @@ jobs:
           path: |
             artifacts/ColdWarCamoSwitcher-win-x64.zip
             artifacts/SHA256SUMS
-            artifacts/ui-preview*.png
+            artifacts/ui-preview.png
+            artifacts/ui-preview-library.png
           if-no-files-found: error
           retention-days: 14

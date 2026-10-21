@@ -1,6 +1,6 @@
 # BlackIce CW
 
-A Windows menu for Call of Duty: Black Ops Cold War with a glass interface, searchable camos, favorites, and saved camo and aim preferences.
+A Windows camo menu for Call of Duty: Black Ops Cold War with a glass interface, searchable camos, favorites, and saved configs.
 
 ## Install
 
@@ -18,16 +18,12 @@ Requires Windows 10/11 x64.
 4. Return to the game, select another camo, then reselect **Shards** to refresh the weapon's appearance.
 5. When finished, click **Restore original Shards** and **Disconnect**.
 
-To save a local config, choose a camo, enter a name under **Saved configs**, and press **Save**. Select a saved config and press **Load** to restore its camo and aim preferences, then **Apply selected camo** when connected. Use **Import** and **Export** to transfer your config library.
+To save a local config, choose a camo, enter a name under **Saved configs**, and press **Save**. Select a saved config and press **Load** to restore its camo selection, then **Apply selected camo** when connected. Use **Import** and **Export** to transfer your config library.
 
 Click **☆** to favorite a camo and **Favorites** to show your favorites.
-
-Open **Silent aim settings** to configure FOV, hit chance, distance, target bone, activation preference, visibility, and **Multiplayer + Zombies** mode. Press **Save settings** to remember your preferences. These settings are included in named configs and import/export; in-game silent aim activation remains unavailable in this build.
 
 ## Preview
 
 ![Camo library](docs/images/camo-library.png)
 
 ![Saved configs and favorites](docs/images/saved-configs.png)
-
-![Silent aim preferences with in-game activation unavailable](docs/images/silent-aim-settings.png)

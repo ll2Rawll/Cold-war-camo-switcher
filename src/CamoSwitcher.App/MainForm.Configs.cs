@@ -67,8 +67,6 @@ public sealed partial class MainForm
         _filterTimer.Tick += (_, _) => FlushSearch();
         _saveTimer.Tick += (_, _) => { _saveTimer.Stop(); PersistPreferences(); };
         _activityButton.Click += (_, _) => ShowActivity();
-        _aimSettingsButton.Click += (_, _) => ShowSilentAimSettings();
-        _tips.SetToolTip(_aimSettingsButton, "Configure saved aim preferences. In-game silent aim is unavailable.");
     }
 
     protected override void OnKeyDown(KeyEventArgs e)
@@ -89,7 +87,6 @@ public sealed partial class MainForm
         {
             var result = _configStore.Load();
             _userData = result.Data;
-            _silentAim = _userData.Preferences.SilentAim;
             _favorites.UnionWith(_userData.Preferences.FavoriteIds);
             _onlyFavorites = _userData.Preferences.FavoritesOnly;
             _favoritesButton.SetActive(_onlyFavorites);
@@ -117,8 +114,7 @@ public sealed partial class MainForm
     private UserPreferences CapturePreferences() => new(
         _selected?.Id ?? _userData.Preferences.SelectedCamoId,
         _category.SelectedItem as string ?? "All camos", _search.Text[..Math.Min(_search.Text.Length, 100)],
-        _onlyFavorites, _favorites.Order().ToArray(), (_configs.SelectedItem as SavedConfig)?.Id)
-        { SilentAim = _silentAim };
+        _onlyFavorites, _favorites.Order().ToArray(), (_configs.SelectedItem as SavedConfig)?.Id);
 
     private void QueuePreferencesSave()
     {
@@ -147,14 +143,14 @@ public sealed partial class MainForm
         try
         {
             var next = ConfigStore.Upsert(_userData with { Preferences = CapturePreferences() },
-                _configName.Text, _selected.Id, _category.SelectedItem as string ?? "All camos", _onlyFavorites, _silentAim);
+                _configName.Text, _selected.Id, _category.SelectedItem as string ?? "All camos", _onlyFavorites);
             var saved = next.Configs.Single(c => c.Name.Equals(_configName.Text.Trim(), StringComparison.OrdinalIgnoreCase));
             next = next with { Preferences = next.Preferences with { LastConfigId = saved.Id } };
             _configStore.Save(next);
             _userData = next;
             RefreshConfigs(saved.Id);
             _preferencesDirty = false;
-            Log($"Saved “{saved.Name}” with your camo and aim preferences. Silent aim is inactive.");
+            Log($"Saved “{saved.Name}”. Load it any time to prepare this camo selection.");
         }
         catch (Exception ex) { ReportError(ex); }
     }
@@ -165,7 +161,6 @@ public sealed partial class MainForm
         _restoringPreferences = true;
         try
         {
-            _silentAim = config.SilentAim;
             _search.Text = "";
             var camo = CamoCatalog.All.Single(c => c.Id == config.CamoId);
             _category.SelectedItem = camo.Category.StartsWith(config.Category, StringComparison.Ordinal) ? config.Category : "All camos";
@@ -267,29 +262,25 @@ public sealed partial class MainForm
         _favorite.PerformClick();
         if (!_favorites.Contains(66)) throw new InvalidOperationException("Favorite action failed.");
         _configName.Text = "Dark Aether";
-        _silentAim = SmokeAimSettings;
         _saveConfig.PerformClick();
-        if (_userData.Configs.Length != 1 || _userData.Configs[0].CamoId != 66 || _userData.Configs[0].SilentAim != SmokeAimSettings)
+        if (_userData.Configs.Length != 1 || _userData.Configs[0].CamoId != 66)
             throw new InvalidOperationException("Saving a named config failed.");
         _search.Text = "Shards";
-        _silentAim = SilentAimSettings.Default;
         FlushSearch();
         _loadConfig.PerformClick();
-        if (_selected?.Id != 66 || _apply.Enabled || _silentAim != SmokeAimSettings)
-            throw new InvalidOperationException("Loading a config must restore camo and aim preferences without activating a game feature.");
+        if (_selected?.Id != 66 || _apply.Enabled) throw new InvalidOperationException("Loading a config must prepare a camo without requiring or changing a game connection.");
         _favoritesButton.PerformClick();
         if (_grid.Rows.Count != 1) throw new InvalidOperationException("Favorite filter failed.");
         _favoritesButton.PerformClick();
         PersistPreferences();
         var reloaded = new ConfigStore(Path.GetDirectoryName(_configStore.FilePath)!).Load().Data;
-        if (reloaded.Configs.Length != 1 || reloaded.Preferences.SelectedCamoId != 66 || !reloaded.Preferences.FavoriteIds.Contains((byte)66) ||
-            reloaded.Preferences.SilentAim != SmokeAimSettings || reloaded.Configs[0].SilentAim != SmokeAimSettings)
+        if (reloaded.Configs.Length != 1 || reloaded.Preferences.SelectedCamoId != 66 || !reloaded.Preferences.FavoriteIds.Contains((byte)66))
             throw new InvalidOperationException("Config and preference persistence failed.");
     }
 
     public void VerifyRestoredConfigUi()
     {
-        if (_selected?.Id != 66 || !_favorites.Contains(66) || _configs.SelectedItem is not SavedConfig { CamoId: 66 } || _silentAim != SmokeAimSettings)
+        if (_selected?.Id != 66 || !_favorites.Contains(66) || _configs.SelectedItem is not SavedConfig { CamoId: 66 })
             throw new InvalidOperationException("Saved setup was not restored after restarting the app.");
     }
 }

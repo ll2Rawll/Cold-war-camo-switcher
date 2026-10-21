@@ -22,7 +22,6 @@ public sealed partial class MainForm
         heading.Controls.Add(MakeLabel("Cold War Studio", 25, TextColor, FontStyle.Bold), 0, 0);
         heading.Controls.Add(MakeLabel("Your camos. Your favorites. Your setup.", 10, Muted), 0, 1);
         heading.Controls.Add(_connectionBadge, 1, 0);
-        heading.Controls.Add(_aimSettingsButton, 1, 1);
         _connectionBadge.TextAlign = ContentAlignment.MiddleRight;
         root.Controls.Add(heading, 0, 0);
 
