@@ -251,6 +251,7 @@ public sealed partial class MainForm : Form
         _loadConfig.Enabled = _configs.SelectedItem is SavedConfig;
         _deleteConfig.Enabled = _configs.SelectedItem is SavedConfig;
         _exportConfigs.Enabled = _userData.Configs.Length > 0;
+        _aimSettingsButton.Enabled = !_busy && !_configSavingBlocked;
     }
 
     private void ExportDiagnostics(IWin32Window? owner = null)
@@ -346,7 +347,7 @@ public sealed partial class MainForm : Form
         VerifyConfigUi();
         if (_grid.Width < 380 || _name.Height < 28 || _status.Height < 28 || _configs.Parent!.Height < 27)
             throw new InvalidOperationException("The UI layout must keep the catalog, selected camo and connection status visible.");
-        foreach (var control in new Control[] { _scan, _refresh, _cancel, _disconnect, _loadConfig, _saveConfig, _configs, _configName, _category, _search })
+        foreach (var control in new Control[] { _scan, _refresh, _cancel, _disconnect, _loadConfig, _saveConfig, _configs, _configName, _category, _search, _aimSettingsButton })
         {
             var parent = control.Parent!;
             if (control.Bottom > parent.ClientSize.Height || control.Right > parent.ClientSize.Width || control.Top < 0 || control.Left < 0)

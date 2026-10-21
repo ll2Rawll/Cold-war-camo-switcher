@@ -2,10 +2,14 @@ using System.Text.Json;
 
 namespace CamoSwitcher.Core;
 
-public sealed record SavedConfig(Guid Id, string Name, byte CamoId, string Category, bool FavoritesOnly, DateTimeOffset UpdatedAtUtc);
+public sealed record SavedConfig(Guid Id, string Name, byte CamoId, string Category, bool FavoritesOnly, DateTimeOffset UpdatedAtUtc)
+{
+    public SilentAimSettings SilentAim { get; init; } = SilentAimSettings.Default;
+}
 public sealed record UserPreferences(byte SelectedCamoId, string Category, string Search, bool FavoritesOnly, byte[] FavoriteIds, Guid? LastConfigId = null)
 {
     public static UserPreferences Default => new(1, "All camos", "", false, []);
+    public SilentAimSettings SilentAim { get; init; } = SilentAimSettings.Default;
 }
 public sealed record UserData(int FormatVersion, SavedConfig[] Configs, UserPreferences Preferences)
 {
@@ -64,12 +68,15 @@ public sealed class ConfigStore(string directory)
         finally { if (File.Exists(temporaryPath)) File.Delete(temporaryPath); }
     }
 
-    public static UserData Upsert(UserData data, string name, byte camoId, string category, bool favoritesOnly)
+    public static UserData Upsert(UserData data, string name, byte camoId, string category, bool favoritesOnly, SilentAimSettings? silentAim = null)
     {
         name = name.Trim();
         if (!ValidName(name)) throw new ArgumentException("Give this config a name using 1–48 printable characters.", nameof(name));
         var existing = data.Configs.FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-        var config = new SavedConfig(existing?.Id ?? Guid.NewGuid(), name, camoId, category, favoritesOnly, DateTimeOffset.UtcNow);
+        var config = new SavedConfig(existing?.Id ?? Guid.NewGuid(), name, camoId, category, favoritesOnly, DateTimeOffset.UtcNow)
+        {
+            SilentAim = silentAim ?? existing?.SilentAim ?? SilentAimSettings.Default
+        };
         var result = data with { Configs = data.Configs.Where(c => c.Id != config.Id).Append(config).OrderBy(c => c.Name, StringComparer.OrdinalIgnoreCase).ToArray() };
         Validate(result);
         return result;
@@ -81,7 +88,7 @@ public sealed class ConfigStore(string directory)
         Validate(imported);
         var result = current;
         foreach (var config in imported.Configs)
-            result = Upsert(result, config.Name, config.CamoId, config.Category, config.FavoritesOnly);
+            result = Upsert(result, config.Name, config.CamoId, config.Category, config.FavoritesOnly, config.SilentAim);
         return result with { Preferences = result.Preferences with { FavoriteIds = current.Preferences.FavoriteIds.Union(imported.Preferences.FavoriteIds).Order().ToArray() } };
     }
 
@@ -94,7 +101,9 @@ public sealed class ConfigStore(string directory)
             data.Configs.Select(c => c.Id).Distinct().Count() != data.Configs.Length ||
             data.Configs.Select(c => c.Name).Distinct(StringComparer.OrdinalIgnoreCase).Count() != data.Configs.Length)
             throw new InvalidDataException("Config names, IDs or camo choices are invalid or duplicated.");
+        foreach (var config in data.Configs) SilentAimSettings.Validate(config.SilentAim);
         var p = data.Preferences;
+        SilentAimSettings.Validate(p.SilentAim);
         if (!ValidId(p.SelectedCamoId) || !Categories.Contains(p.Category) || p.Search is null || p.Search.Length > 100 ||
             p.FavoriteIds is null || p.FavoriteIds.Length > 121 || p.FavoriteIds.Any(id => !ValidId(id)) || p.FavoriteIds.Distinct().Count() != p.FavoriteIds.Length)
             throw new InvalidDataException("Saved menu preferences are invalid.");

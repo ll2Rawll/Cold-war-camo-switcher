@@ -22,6 +22,8 @@ To save a local config, choose a camo, enter a name under **Saved configs**, and
 
 Click **☆** to favorite a camo and **Favorites** to show your favorites.
 
+Open **Silent aim settings** to configure game mode, FOV, hit chance, distance, target bone, activation preference, and visibility. **Save settings** remembers these locally; named configs and import/export also include them. In-game silent aim activation is unavailable in this build.
+
 ## Preview
 
 ![Camo library](docs/images/camo-library.png)

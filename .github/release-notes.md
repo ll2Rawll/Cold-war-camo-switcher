@@ -1,17 +1,19 @@
-Redesigned Windows x64 camo switcher with an iOS 26 inspired glass interface, rounded controls, a cleaner connect–choose–apply flow, and 121 searchable camo IDs.
+Adds a configurable silent-aim preferences dialog to the glass-style menu.
 
-- Named saved configs with local JSON storage, import/export and same-name updates.
-- Favorites and remembered selection, filters and the last selected config.
-- Debounced search and preference saves, double-buffered rendering and no continuous visual animation.
-- Config loading prepares the selection; it does not automatically apply a camo to a game process.
-- Atomic config writes, validation and recovery backups for unreadable local config files.
+**Configuration only: in-game silent aim is not implemented.** The activation checkbox stays disabled. There is no target tracking, shot redirection, injection or aim-related game-memory writing in this release.
 
-Download `ColdWarCamoSwitcher-win-x64.zip`, extract it, and run `ColdWarCamoSwitcher.exe`. The .NET runtime is included. Equip an available Shards camo in Cold War before scanning. Read the bundled `READ-ME-FIRST.md` for the in-game steps.
+- Settings for Multiplayer + Zombies, FOV, hit chance, distance, target bone, activation preference, and visible-target filtering.
+- Preferences remembered across app restarts and included in named config Save/Load and JSON import/export.
+- Existing config libraries retain their camos and gain default aim preferences.
+- Input validation rejects invalid ranges, unknown modes and null settings without replacing a valid config file.
+- Reset defaults and Cancel keep unsaved changes separate from saved preferences.
 
-**Experimental Game Pass compatibility:** this build implements the historical Shards option replacement method. It has not been tested against a running PC Xbox/Game Pass copy of Cold War. The 121 IDs are catalog entries, not a guarantee that every camo is usable. This does not permanently unlock the account's camo menu. Online force-save and offline save-file editing remain unimplemented.
+Download `ColdWarCamoSwitcher-win-x64.zip`, extract it, and open `ColdWarCamoSwitcher.exe`. The .NET runtime is included. Use **Silent aim settings** in the top-right of the menu to configure preferences. The bundled `READ-ME-FIRST.md` explains installation and usage.
 
-The Windows build checks cover controlled child-process memory access, switching, restoration, read-only page rejection, the build-report helper, config import/export and recovery, and saving/loading preferences across an app restart. These checks do not establish actual in-game compatibility or saved profile persistence.
+The existing camo switcher remains experimental on PC Xbox / Game Pass. Permanent unlocks, online force-save and offline save-file editing remain unimplemented. Actual gameplay integration still requires verification against the installed game build.
 
-The SHA-256 checksum for the ZIP is in `SHA256SUMS`.
+Validation covers 25 core/config checks, native Windows memory fixtures, legacy config loading, aim setting import/export and validation, and Windows UI checks for editing, reset, unavailable activation, layout and restart persistence. These checks do not establish in-game aim functionality or camo persistence.
 
-![Desktop menu preview](https://github.com/pistolswang013/Cold-war-camo-switcher/releases/download/v0.2.0/ui-preview.png)
+The ZIP checksum is included in `SHA256SUMS`.
+
+![Aim preferences, with in-game activation unavailable](https://github.com/ll2Rawll/Cold-war-camo-switcher/releases/download/v0.3.0/ui-preview-silent-aim.png)

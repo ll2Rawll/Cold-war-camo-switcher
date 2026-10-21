@@ -46,5 +46,5 @@ jobs:
           $expected = $Matches[1]
           $actual = (Get-FileHash release-artifacts/ColdWarCamoSwitcher-win-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
           if ($actual -ne $expected) { throw 'The verified package checksum does not match.' }
-          gh release create v0.2.0 release-artifacts/ColdWarCamoSwitcher-win-x64.zip release-artifacts/SHA256SUMS release-artifacts/ui-preview.png --repo $repo --target $run.head_sha --prerelease --title 'v0.2.0 - Glass UI and saved configs' --notes-file .github/release-notes.md
+          gh release create v0.3.0 release-artifacts/ColdWarCamoSwitcher-win-x64.zip release-artifacts/SHA256SUMS release-artifacts/ui-preview.png release-artifacts/ui-preview-silent-aim.png --repo $repo --target $run.head_sha --prerelease --title 'v0.3.0 - Saved aim settings (configuration only)' --notes-file .github/release-notes.md
           if ($LASTEXITCODE -ne 0) { throw 'Release publication failed.' }

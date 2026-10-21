@@ -1,10 +1,71 @@
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using CamoSwitcher.Core;
 
 internal static class ConfigChecks
 {
     internal static IEnumerable<(string Name, Action Run)> All()
     {
+        yield return ("Legacy config libraries gain default aim settings without losing their camo data", () => InFolder(folder =>
+        {
+            var data = ConfigStore.Upsert(UserData.Empty, "Original", 66, "Mastery", false);
+            var json = JsonNode.Parse(JsonSerializer.Serialize(data))!;
+            json["Preferences"]!.AsObject().Remove("SilentAim");
+            foreach (var config in json["Configs"]!.AsArray()) config!.AsObject().Remove("SilentAim");
+            var path = Path.Combine(folder, "old-configs.json");
+            File.WriteAllText(path, json.ToJsonString());
+            var restored = ConfigStore.Read(path);
+            Check.Equal("Original", restored.Configs.Single().Name);
+            Check.Equal((byte)66, restored.Configs.Single().CamoId);
+            Check.Equal(SilentAimSettings.Default, restored.Configs.Single().SilentAim);
+            Check.Equal(SilentAimSettings.Default, restored.Preferences.SilentAim);
+        }));
+        yield return ("Aim settings survive storage and import while preserving current preferences", () => InFolder(folder =>
+        {
+            var first = new SilentAimSettings(24, 75, 150, AimTargetBone.UpperChest, AimActivation.FireButton, AimGameMode.Both, false);
+            var second = new SilentAimSettings(45, 60, 200, AimTargetBone.CenterMass, AimActivation.AimButton, AimGameMode.Zombies);
+            var data = ConfigStore.Upsert(UserData.Empty, "Night", 66, "Mastery", false, first);
+            data = data with { Preferences = data.Preferences with { SilentAim = first } };
+            var store = new ConfigStore(folder);
+            store.Save(data);
+            var restored = new ConfigStore(folder).Load().Data;
+            Check.Equal(first, restored.Preferences.SilentAim);
+            Check.Equal(first, restored.Configs.Single().SilentAim);
+            var imported = ConfigStore.Upsert(UserData.Empty, "NIGHT", 61, "Mastery", false, second);
+            var merged = ConfigStore.Merge(restored, imported);
+            Check.Equal(second, merged.Configs.Single().SilentAim);
+            Check.Equal(first, merged.Preferences.SilentAim);
+            Check.Equal(restored.Configs.Single().Id, merged.Configs.Single().Id);
+            var updatedCamo = ConfigStore.Upsert(merged, "Night", 63, "Mastery", false);
+            Check.Equal(second, updatedCamo.Configs.Single().SilentAim);
+            var exportPath = Path.Combine(folder, "export.json");
+            ConfigStore.Write(exportPath, merged);
+            Check.Equal(second, ConfigStore.Read(exportPath).Configs.Single().SilentAim);
+        }));
+        yield return ("Invalid aim imports and saves preserve the previous valid files", () => InFolder(folder =>
+        {
+            var store = new ConfigStore(folder);
+            var data = ConfigStore.Upsert(UserData.Empty, "Keep", 66, "Mastery", false);
+            store.Save(data);
+            var before = File.ReadAllBytes(store.FilePath);
+            SilentAimSettings[] invalid =
+            [
+                new(FieldOfView: 0), new(FieldOfView: 181), new(HitChance: -1), new(HitChance: 101),
+                new(MaxDistance: 0), new(MaxDistance: 1001), new(TargetBone: (AimTargetBone)99),
+                new(Activation: (AimActivation)99), new(GameMode: (AimGameMode)99), null!
+            ];
+            foreach (var settings in invalid)
+            {
+                Check.Throws<InvalidDataException>(() => store.Save(data with { Preferences = data.Preferences with { SilentAim = settings } }));
+                Check.Throws<InvalidDataException>(() => store.Save(data with { Configs = [data.Configs[0] with { SilentAim = settings }] }));
+                Check.True(before.SequenceEqual(File.ReadAllBytes(store.FilePath)));
+            }
+            var source = Path.Combine(folder, "invalid-import.json");
+            var malformed = JsonSerializer.Serialize(data with { Preferences = data.Preferences with { SilentAim = null! } });
+            File.WriteAllText(source, malformed);
+            Check.Throws<InvalidDataException>(() => ConfigStore.Read(source));
+            Check.Equal(malformed, File.ReadAllText(source));
+        }));
         yield return ("Configs survive a fresh store with favorites and menu preferences", () => InFolder(folder =>
         {
             var store = new ConfigStore(Path.Combine(folder, "nested"));

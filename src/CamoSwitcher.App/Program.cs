@@ -19,6 +19,8 @@ internal static class Program
                 CapturePreview(form, libraryPreview);
                 form.VerifyUi();
                 CapturePreview(form, args[1]);
+                form.VerifySilentAimUi(Path.Combine(Path.GetDirectoryName(Path.GetFullPath(args[1]))!,
+                    Path.GetFileNameWithoutExtension(args[1]) + "-silent-aim.png"));
                 form.Hide();
                 using var reopened = new MainForm(tempDirectory);
                 reopened.Show();

@@ -35,6 +35,14 @@ Configs live at `%LOCALAPPDATA%\ColdWarCamoSwitcher\configs.json`. Up to 100 nam
 
 Keyboard shortcuts: **Ctrl+F** searches, **Ctrl+S** saves the named config, **F5** refreshes processes, and **Esc** cancels a scan. Menu preference saves are batched briefly while you interact with controls and flushed on normal closure.
 
+## Silent aim settings
+
+Open **Silent aim settings** in the top-right corner of the menu. Set the game mode (both Multiplayer and Zombies by default), FOV, hit chance, maximum distance, target bone, activation preference, and visibility filter. **Reset defaults** changes the dialog's values; **Cancel** discards edits. **Save settings** writes your preferences locally.
+
+Named configs also capture these preferences. **Load** restores both the selected camo and aim preferences; import/export carries the aim settings with each config. Existing config libraries without aim settings load with defaults.
+
+**This is configuration support only.** The activation checkbox is disabled because the app has no verified targeting or shot-redirection integration for Cold War. Saving preferences, loading a config, and connecting to the camo session do not enable silent aim. Supporting actual gameplay requires a separately verified implementation for the installed build; "latest" is not an executable identity. The bundled build-report helper records the installed file version and SHA-256.
+
 ## Persistence and offline saves
 
 Online force-save and offline save-file editing remain unimplemented. These require the exact target build, the relevant save layout/integrity checks, and an actual in-game restart test. The app's session switcher is usable code, but it has not been validated against your running Game Pass game.
