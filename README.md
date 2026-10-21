@@ -29,3 +29,5 @@ Open **Silent aim settings** to configure game mode, FOV, hit chance, distance, 
 ![Camo library](docs/images/camo-library.png)
 
 ![Saved configs and favorites](docs/images/saved-configs.png)
+
+![Silent aim preferences with in-game activation unavailable](docs/images/silent-aim-settings.png)
